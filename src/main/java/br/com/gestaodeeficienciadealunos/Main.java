@@ -31,19 +31,20 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        menu_algoritmo = new javax.swing.JMenuItem();
+        menu_aluno = new javax.swing.JMenuItem();
+        menu_area_pesquisa = new javax.swing.JMenuItem();
+        menu_complexidade = new javax.swing.JMenuItem();
+        menu_curso = new javax.swing.JMenuItem();
+        menu_linguagem_programacao = new javax.swing.JMenuItem();
+        menu_problema = new javax.swing.JMenuItem();
+        menu_solucao = new javax.swing.JMenuItem();
+        menu_sair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão de Eficiência de Alunos");
         setPreferredSize(new java.awt.Dimension(1024, 768));
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Mais usados"));
 
@@ -64,76 +65,81 @@ public class Main extends javax.swing.JFrame {
 
         jMenu3.setText("Cadastro");
 
-        jMenuItem1.setText("Algoritmo");
-        jMenu3.add(jMenuItem1);
+        menu_algoritmo.setText("Algoritmo");
+        jMenu3.add(menu_algoritmo);
 
-        jMenuItem2.setText("Aluno");
-        jMenuItem2.setToolTipText("");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menu_aluno.setText("Aluno");
+        menu_aluno.setToolTipText("");
+        menu_aluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menu_alunoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        jMenu3.add(menu_aluno);
 
-        jMenuItem3.setText("Área de pesquisa");
-        jMenuItem3.setToolTipText("");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menu_area_pesquisa.setText("Área de pesquisa");
+        menu_area_pesquisa.setToolTipText("");
+        menu_area_pesquisa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menu_area_pesquisaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
+        jMenu3.add(menu_area_pesquisa);
 
-        jMenuItem4.setText("Complexidade");
-        jMenuItem4.setToolTipText("");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        menu_complexidade.setText("Complexidade");
+        menu_complexidade.setToolTipText("");
+        menu_complexidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menu_complexidadeActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenu3.add(menu_complexidade);
 
-        jMenuItem5.setText("Curso");
-        jMenuItem5.setToolTipText("");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menu_curso.setText("Curso");
+        menu_curso.setToolTipText("");
+        menu_curso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menu_cursoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem5);
+        jMenu3.add(menu_curso);
 
-        jMenuItem6.setText("Linguagem de programação");
-        jMenuItem6.setToolTipText("");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        menu_linguagem_programacao.setText("Linguagem de programação");
+        menu_linguagem_programacao.setToolTipText("");
+        menu_linguagem_programacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                menu_linguagem_programacaoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem6);
+        jMenu3.add(menu_linguagem_programacao);
 
-        jMenuItem7.setText("Problema");
-        jMenuItem7.setToolTipText("");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        menu_problema.setText("Problema");
+        menu_problema.setToolTipText("");
+        menu_problema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                menu_problemaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem7);
+        jMenu3.add(menu_problema);
 
-        jMenuItem8.setText("Solução");
-        jMenuItem8.setToolTipText("");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        menu_solucao.setText("Solução");
+        menu_solucao.setToolTipText("");
+        menu_solucao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                menu_solucaoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem8);
+        jMenu3.add(menu_solucao);
 
         jMenu1.add(jMenu3);
 
-        jMenuItem9.setText("Sair");
-        jMenu1.add(jMenuItem9);
+        menu_sair.setText("Sair");
+        menu_sair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_sairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menu_sair);
 
         jMenuBar1.add(jMenu1);
 
@@ -157,35 +163,41 @@ public class Main extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menu_alunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_alunoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menu_alunoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void menu_area_pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_area_pesquisaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_menu_area_pesquisaActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void menu_complexidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_complexidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_menu_complexidadeActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void menu_cursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cursoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_menu_cursoActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void menu_linguagem_programacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_linguagem_programacaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_menu_linguagem_programacaoActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void menu_problemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_problemaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_menu_problemaActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    private void menu_solucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_solucaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_menu_solucaoActionPerformed
+
+    private void menu_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_sairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_menu_sairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,7 +232,11 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                Main main_screen = new Main();
+                main_screen.setVisible(true);
+                main_screen.setEnabled(false);
+                Login login_screen = new Login(main_screen);
+                login_screen.setVisible(true);
             }
         });
     }
@@ -229,15 +245,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem menu_algoritmo;
+    private javax.swing.JMenuItem menu_aluno;
+    private javax.swing.JMenuItem menu_area_pesquisa;
+    private javax.swing.JMenuItem menu_complexidade;
+    private javax.swing.JMenuItem menu_curso;
+    private javax.swing.JMenuItem menu_linguagem_programacao;
+    private javax.swing.JMenuItem menu_problema;
+    private javax.swing.JMenuItem menu_sair;
+    private javax.swing.JMenuItem menu_solucao;
     // End of variables declaration//GEN-END:variables
 }
