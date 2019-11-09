@@ -7,10 +7,12 @@ package br.com.gestaodeeficienciadealunos;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Mysql {
+public class Mysql{
     private static Connection con;
+    private static PreparedStatement ps;
     
     public static Connection conectar() throws SQLException
     {

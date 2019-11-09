@@ -5,6 +5,9 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -33,8 +36,8 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btn_entrar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        campo_login = new javax.swing.JTextField();
+        campo_senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -63,7 +66,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setToolTipText("");
+        campo_login.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,12 +79,12 @@ public class Login extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addGap(23, 23, 23)
-                            .addComponent(jTextField1))
+                            .addComponent(campo_login))
                         .addComponent(jLabel1)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField2)))
+                            .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btn_cancelar)
                         .addGap(18, 18, 18)
@@ -96,11 +99,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campo_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
@@ -119,31 +122,43 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
-        // TODO add your handling code here:
-        
+
         try{
-            Mysql.conectar();
-            JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
-            main_screen.setEnabled(true);
-            this.setVisible(false);
+            Connection con = Mysql.conectar();
+            PreparedStatement ps = con.prepareStatement("SELECT DES_LOGIN, NUM_SENHA FROM usuario WHERE DES_LOGIN = ? AND NUM_SENHA = md5(?)");
+                      
+            ps.setString(1, campo_login.getText());
+            ps.setString(2, new String(campo_senha.getPassword()));
+            
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+            {
+                JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
+                main_screen.setEnabled(true);
+                this.setVisible(false);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Usuário e/ou senha inválidos!");
+            }
         }
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
             
             /* somente para testes, depois remover */
-            main_screen.setEnabled(true);
-            this.setVisible(false);
+            //main_screen.setEnabled(true);
+            //this.setVisible(false);
         }
     }//GEN-LAST:event_btn_entrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
     private javax.swing.JButton btn_entrar;
+    private javax.swing.JTextField campo_login;
+    private javax.swing.JPasswordField campo_senha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
