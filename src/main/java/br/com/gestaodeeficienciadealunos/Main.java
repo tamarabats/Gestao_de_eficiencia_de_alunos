@@ -5,10 +5,6 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
-/**
- *
- * @author Lenovo
- */
 public class Main extends javax.swing.JFrame {
 
     /**
@@ -150,16 +146,16 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(445, Short.MAX_VALUE)
+                .addContainerGap(426, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -171,23 +167,28 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_alunoActionPerformed
 
     private void menu_area_pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_area_pesquisaActionPerformed
-        // TODO add your handling code here:
+        AreaPesquisa area_pesquisa = new AreaPesquisa();
+        area_pesquisa.setVisible(true);
     }//GEN-LAST:event_menu_area_pesquisaActionPerformed
 
     private void menu_complexidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_complexidadeActionPerformed
-        // TODO add your handling code here:
+        Complexidade complexidade = new Complexidade();
+        complexidade.setVisible(true);
     }//GEN-LAST:event_menu_complexidadeActionPerformed
 
     private void menu_cursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cursoActionPerformed
-        // TODO add your handling code here:
+        Cursos cursos = new Cursos();
+        cursos.setVisible(true);
     }//GEN-LAST:event_menu_cursoActionPerformed
 
     private void menu_linguagem_programacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_linguagem_programacaoActionPerformed
-        // TODO add your handling code here:
+        Linguagens linguagens = new Linguagens();
+        linguagens.setVisible(true);
     }//GEN-LAST:event_menu_linguagem_programacaoActionPerformed
 
     private void menu_problemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_problemaActionPerformed
-        // TODO add your handling code here:
+        Problemas problemas = new Problemas();
+        problemas.setVisible(true);
     }//GEN-LAST:event_menu_problemaActionPerformed
 
     private void menu_solucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_solucaoActionPerformed
@@ -195,7 +196,6 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_solucaoActionPerformed
 
     private void menu_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_sairActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_menu_sairActionPerformed
 

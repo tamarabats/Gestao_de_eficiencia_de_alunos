@@ -5,10 +5,9 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
-/**
- *
- * @author Lenovo
- */
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
     Main main_screen;
@@ -71,7 +70,7 @@ public class Login extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
@@ -87,12 +86,12 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(btn_cancelar)
                         .addGap(18, 18, 18)
                         .addComponent(btn_entrar)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -106,7 +105,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_cancelar)
                     .addComponent(btn_entrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,9 +120,21 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
         // TODO add your handling code here:
-        main_screen.setEnabled(true);
-        this.setVisible(false);
         
+        try{
+            Mysql.conectar();
+            JOptionPane.showMessageDialog(this, "Login efetuado com sucesso!");
+            main_screen.setEnabled(true);
+            this.setVisible(false);
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            
+            /* somente para testes, depois remover */
+            main_screen.setEnabled(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_btn_entrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
