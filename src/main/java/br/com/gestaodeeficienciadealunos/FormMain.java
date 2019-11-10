@@ -5,12 +5,12 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
-public class Main extends javax.swing.JFrame {
+public class FormMain extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Main() {
+    public FormMain() {
         initComponents();
     }
 
@@ -39,7 +39,6 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão de Eficiência de Alunos");
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Mais usados"));
@@ -167,27 +166,27 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_alunoActionPerformed
 
     private void menu_area_pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_area_pesquisaActionPerformed
-        AreaPesquisa area_pesquisa = new AreaPesquisa();
+        FormAreaPesquisa area_pesquisa = new FormAreaPesquisa();
         area_pesquisa.setVisible(true);
     }//GEN-LAST:event_menu_area_pesquisaActionPerformed
 
     private void menu_complexidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_complexidadeActionPerformed
-        Complexidade complexidade = new Complexidade();
+        FormComplexidade complexidade = new FormComplexidade();
         complexidade.setVisible(true);
     }//GEN-LAST:event_menu_complexidadeActionPerformed
 
     private void menu_cursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cursoActionPerformed
-        Cursos cursos = new Cursos();
+        FormCursos cursos = new FormCursos();
         cursos.setVisible(true);
     }//GEN-LAST:event_menu_cursoActionPerformed
 
     private void menu_linguagem_programacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_linguagem_programacaoActionPerformed
-        Linguagens linguagens = new Linguagens();
+        FormLinguagens linguagens = new FormLinguagens();
         linguagens.setVisible(true);
     }//GEN-LAST:event_menu_linguagem_programacaoActionPerformed
 
     private void menu_problemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_problemaActionPerformed
-        Problemas problemas = new Problemas();
+        FormProblemas problemas = new FormProblemas();
         problemas.setVisible(true);
     }//GEN-LAST:event_menu_problemaActionPerformed
 
@@ -216,14 +215,18 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -232,10 +235,10 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Main main_screen = new Main();
+                FormMain main_screen = new FormMain();
                 main_screen.setVisible(true);
                 main_screen.setEnabled(false);
-                Login login_screen = new Login(main_screen);
+                FormLogin login_screen = new FormLogin(main_screen);
                 login_screen.setVisible(true);
             }
         });

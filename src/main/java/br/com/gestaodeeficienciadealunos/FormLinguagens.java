@@ -5,17 +5,45 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodolpho
  */
-public class Linguagens extends javax.swing.JFrame {
+public class FormLinguagens extends javax.swing.JFrame {
 
+    DefaultTableModel modelo_tabela = new DefaultTableModel();
     /**
      * Creates new form AreaPesquisa
      */
-    public Linguagens() {
+    public FormLinguagens() {
         initComponents();
+        
+        tabela_linguagens.setModel(modelo_tabela);
+        
+        modelo_tabela.addColumn("Código");
+        modelo_tabela.addColumn("Linguagem de Programação");      
+        
+        try{
+            Connection con = Mysql.conectar();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM linguagem ORDER BY NOM_LINGUAGEM ASC");
+                                 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                modelo_tabela.addRow(new Object[] { rs.getInt("COD_LINGUAGEM"), rs.getString("NOM_LINGUAGEM") });
+            }
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
     }
 
     /**
@@ -32,7 +60,7 @@ public class Linguagens extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         area_pesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela_linguagens = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -47,7 +75,7 @@ public class Linguagens extends javax.swing.JFrame {
 
         jLabel2.setText("Linguagem de Programação:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_linguagens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -66,7 +94,7 @@ public class Linguagens extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela_linguagens);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +189,6 @@ public class Linguagens extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabela_linguagens;
     // End of variables declaration//GEN-END:variables
 }

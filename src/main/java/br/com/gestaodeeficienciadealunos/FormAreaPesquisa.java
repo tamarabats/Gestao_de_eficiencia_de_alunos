@@ -5,17 +5,47 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodolpho
  */
-public class Cursos extends javax.swing.JFrame {
+public class FormAreaPesquisa extends javax.swing.JFrame {
 
+    DefaultTableModel modelo_tabela = new DefaultTableModel();
+    
     /**
      * Creates new form AreaPesquisa
      */
-    public Cursos() {
+    public FormAreaPesquisa() {
         initComponents();
+        
+        tabela_area_pesquisa.setModel(modelo_tabela);
+        
+        modelo_tabela.addColumn("Código");
+        modelo_tabela.addColumn("Área de pesquisa");
+        modelo_tabela.addColumn("Descrição");
+        
+        try{
+            Connection con = Mysql.conectar();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM area_pesquisa ORDER BY NOM_AREA_PESQUISA ASC");
+                                 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                modelo_tabela.addRow(new Object[] { rs.getInt("COD_AREA_PESQUISA"), rs.getString("NOM_AREA_PESQUISA"), rs.getString("DES_AREA_PESQUISA") });
+            }
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
     }
 
     /**
@@ -32,7 +62,7 @@ public class Cursos extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         area_pesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela_area_pesquisa = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -41,32 +71,13 @@ public class Cursos extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Cursos");
+        setTitle("Cadastro de Área de Pesquisa");
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Curso:");
+        jLabel2.setText("Área:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Código", "Curso"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela_area_pesquisa);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +172,6 @@ public class Cursos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabela_area_pesquisa;
     // End of variables declaration//GEN-END:variables
 }

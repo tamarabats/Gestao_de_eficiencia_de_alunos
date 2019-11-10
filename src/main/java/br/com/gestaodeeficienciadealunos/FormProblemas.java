@@ -5,17 +5,45 @@
  */
 package br.com.gestaodeeficienciadealunos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodolpho
  */
-public class AreaPesquisa extends javax.swing.JFrame {
+public class FormProblemas extends javax.swing.JFrame {
 
+    DefaultTableModel modelo_tabela = new DefaultTableModel();
     /**
      * Creates new form AreaPesquisa
      */
-    public AreaPesquisa() {
+    public FormProblemas() {
         initComponents();
+        
+        tabela_problemas.setModel(modelo_tabela);
+        
+        modelo_tabela.addColumn("Código");
+        modelo_tabela.addColumn("Problema");      
+        
+        try{
+            Connection con = Mysql.conectar();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM problema ORDER BY DES_PROBLEMA ASC");
+                                 
+            ResultSet rs = ps.executeQuery();
+            while(rs.next())
+            {
+                modelo_tabela.addRow(new Object[] { rs.getInt("COD_PROBLEMA"), rs.getString("DES_PROBLEMA") });
+            }
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
     }
 
     /**
@@ -32,7 +60,7 @@ public class AreaPesquisa extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         area_pesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabela_problemas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -41,13 +69,13 @@ public class AreaPesquisa extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Área de Pesquisa");
+        setTitle("Cadastro de Problemas");
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Área:");
+        jLabel2.setText("Problema:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_problemas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -55,7 +83,7 @@ public class AreaPesquisa extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Código", "Área"
+                "Código", "Problema"
             }
         ) {
             Class[] types = new Class [] {
@@ -66,7 +94,7 @@ public class AreaPesquisa extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabela_problemas);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +138,7 @@ public class AreaPesquisa extends javax.swing.JFrame {
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -161,6 +189,6 @@ public class AreaPesquisa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabela_problemas;
     // End of variables declaration//GEN-END:variables
 }
