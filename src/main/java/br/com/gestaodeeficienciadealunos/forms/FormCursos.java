@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gestaodeeficienciadealunos;
+package br.com.gestaodeeficienciadealunos.forms;
 
+import br.com.gestaodeeficienciadealunos.Mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,28 +17,29 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rodolpho
  */
-public class FormProblemas extends javax.swing.JFrame {
+public class FormCursos extends javax.swing.JFrame {
 
     DefaultTableModel modelo_tabela = new DefaultTableModel();
-    /**
-     * Creates new form AreaPesquisa
-     */
-    public FormProblemas() {
+    FormMain main_screen;
+    
+    public FormCursos(FormMain main_screen) {
+        this.main_screen = main_screen;
         initComponents();
         
-        tabela_problemas.setModel(modelo_tabela);
+        tabela_cursos.setModel(modelo_tabela);
         
         modelo_tabela.addColumn("Código");
-        modelo_tabela.addColumn("Problema");      
+        modelo_tabela.addColumn("Curso");
+        modelo_tabela.addColumn("Período");
         
         try{
             Connection con = Mysql.conectar();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM problema ORDER BY DES_PROBLEMA ASC");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM curso ORDER BY NOM_CURSO ASC");
                                  
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                modelo_tabela.addRow(new Object[] { rs.getInt("COD_PROBLEMA"), rs.getString("DES_PROBLEMA") });
+                modelo_tabela.addRow(new Object[] { rs.getInt("COD_CURSO"), rs.getString("NOM_CURSO"), rs.getString("NUM_PERIODO") });
             }
         }
         catch(SQLException e)
@@ -60,7 +62,7 @@ public class FormProblemas extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         area_pesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela_problemas = new javax.swing.JTable();
+        tabela_cursos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -69,13 +71,13 @@ public class FormProblemas extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Problemas");
+        setTitle("Cadastro de Cursos");
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Problema:");
+        jLabel2.setText("Curso:");
 
-        tabela_problemas.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_cursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -83,7 +85,7 @@ public class FormProblemas extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Código", "Problema"
+                "Código", "Curso"
             }
         ) {
             Class[] types = new Class [] {
@@ -94,7 +96,7 @@ public class FormProblemas extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabela_problemas);
+        jScrollPane1.setViewportView(tabela_cursos);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +140,7 @@ public class FormProblemas extends javax.swing.JFrame {
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,6 +191,6 @@ public class FormProblemas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabela_problemas;
+    private javax.swing.JTable tabela_cursos;
     // End of variables declaration//GEN-END:variables
 }

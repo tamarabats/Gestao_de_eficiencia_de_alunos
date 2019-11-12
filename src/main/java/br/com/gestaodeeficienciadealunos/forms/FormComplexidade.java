@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gestaodeeficienciadealunos;
+package br.com.gestaodeeficienciadealunos.forms;
 
+import br.com.gestaodeeficienciadealunos.Mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,30 +17,28 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rodolpho
  */
-public class FormAreaPesquisa extends javax.swing.JFrame {
+public class FormComplexidade extends javax.swing.JFrame {
 
     DefaultTableModel modelo_tabela = new DefaultTableModel();
+    FormMain main_screen;
     
-    /**
-     * Creates new form AreaPesquisa
-     */
-    public FormAreaPesquisa() {
+    public FormComplexidade(FormMain main_screen) {
+        this.main_screen = main_screen;
         initComponents();
         
-        tabela_area_pesquisa.setModel(modelo_tabela);
+        tabela_complexidade.setModel(modelo_tabela);
         
         modelo_tabela.addColumn("Código");
-        modelo_tabela.addColumn("Área de pesquisa");
-        modelo_tabela.addColumn("Descrição");
+        modelo_tabela.addColumn("Complexidade");
         
         try{
             Connection con = Mysql.conectar();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM area_pesquisa ORDER BY NOM_AREA_PESQUISA ASC");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM complexidade ORDER BY DES_GRAU_COMPLEXIDADE ASC");
                                  
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                modelo_tabela.addRow(new Object[] { rs.getInt("COD_AREA_PESQUISA"), rs.getString("NOM_AREA_PESQUISA"), rs.getString("DES_AREA_PESQUISA") });
+                modelo_tabela.addRow(new Object[] { rs.getInt("COD_COMPLEXIDADE"), rs.getString("DES_GRAU_COMPLEXIDADE") });
             }
         }
         catch(SQLException e)
@@ -62,7 +61,7 @@ public class FormAreaPesquisa extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         area_pesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela_area_pesquisa = new javax.swing.JTable();
+        tabela_complexidade = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -71,13 +70,37 @@ public class FormAreaPesquisa extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Área de Pesquisa");
+        setTitle("Cadastro de Complexidade");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Área:");
+        jLabel2.setText("Complexidade:");
 
-        jScrollPane1.setViewportView(tabela_area_pesquisa);
+        tabela_complexidade.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Código", "Complexidade"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabela_complexidade);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,7 +144,7 @@ public class FormAreaPesquisa extends javax.swing.JFrame {
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -160,6 +183,11 @@ public class FormAreaPesquisa extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        main_screen.setEnabled(true);
+        main_screen.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField area_pesquisa;
     private javax.swing.JTextField codigo;
@@ -172,6 +200,6 @@ public class FormAreaPesquisa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabela_area_pesquisa;
+    private javax.swing.JTable tabela_complexidade;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gestaodeeficienciadealunos;
+package br.com.gestaodeeficienciadealunos.forms;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +14,7 @@ import javax.swing.JOptionPane;
 public class FormLogin extends javax.swing.JFrame {
 
     FormMain main_screen;
-    /**
-     * Creates new form Login
-     */
+    
     public FormLogin(FormMain main_screen) {
         this.main_screen = main_screen;
         initComponents();
@@ -124,7 +122,7 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
-
+/*
         try{
             Connection con = Mysql.conectar();
             PreparedStatement ps = con.prepareStatement("SELECT DES_LOGIN, NUM_SENHA FROM usuario WHERE DES_LOGIN = ? AND NUM_SENHA = md5(?)");
@@ -147,11 +145,9 @@ public class FormLogin extends javax.swing.JFrame {
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            
-            /* somente para testes, depois remover */
-            //main_screen.setEnabled(true);
-            //this.setVisible(false);
-        }
+        }*/
+        main_screen.setEnabled(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btn_entrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

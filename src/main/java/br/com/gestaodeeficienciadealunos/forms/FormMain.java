@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gestaodeeficienciadealunos;
+package br.com.gestaodeeficienciadealunos.forms;
+
+import br.com.gestaodeeficienciadealunos.forms.FormAreaPesquisa;
 
 public class FormMain extends javax.swing.JFrame {
 
@@ -47,7 +49,7 @@ public class FormMain extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 768, Short.MAX_VALUE)
+            .addGap(0, 952, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +154,7 @@ public class FormMain extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(426, Short.MAX_VALUE)
+                .addContainerGap(594, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -166,27 +168,32 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_alunoActionPerformed
 
     private void menu_area_pesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_area_pesquisaActionPerformed
-        FormAreaPesquisa area_pesquisa = new FormAreaPesquisa();
+        FormAreaPesquisa area_pesquisa = new FormAreaPesquisa(this);
+        this.setEnabled(false);
         area_pesquisa.setVisible(true);
     }//GEN-LAST:event_menu_area_pesquisaActionPerformed
 
     private void menu_complexidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_complexidadeActionPerformed
-        FormComplexidade complexidade = new FormComplexidade();
+        FormComplexidade complexidade = new FormComplexidade(this);
+        this.setEnabled(false);
         complexidade.setVisible(true);
     }//GEN-LAST:event_menu_complexidadeActionPerformed
 
     private void menu_cursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cursoActionPerformed
-        FormCursos cursos = new FormCursos();
+        FormCursos cursos = new FormCursos(this);
+        this.setEnabled(false);
         cursos.setVisible(true);
     }//GEN-LAST:event_menu_cursoActionPerformed
 
     private void menu_linguagem_programacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_linguagem_programacaoActionPerformed
-        FormLinguagens linguagens = new FormLinguagens();
-        linguagens.setVisible(true);
+        FormLinguagens linguagens = new FormLinguagens(this);
+        this.setEnabled(false);
+        linguagens.setVisible(true);     
     }//GEN-LAST:event_menu_linguagem_programacaoActionPerformed
 
     private void menu_problemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_problemaActionPerformed
-        FormProblemas problemas = new FormProblemas();
+        FormProblemas problemas = new FormProblemas(this);
+        this.setEnabled(false);
         problemas.setVisible(true);
     }//GEN-LAST:event_menu_problemaActionPerformed
 

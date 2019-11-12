@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.gestaodeeficienciadealunos;
+package br.com.gestaodeeficienciadealunos.forms;
 
+import br.com.gestaodeeficienciadealunos.Mysql;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,28 +17,28 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rodolpho
  */
-public class FormComplexidade extends javax.swing.JFrame {
+public class FormLinguagens extends javax.swing.JFrame {
 
     DefaultTableModel modelo_tabela = new DefaultTableModel();
-    /**
-     * Creates new form AreaPesquisa
-     */
-    public FormComplexidade() {
+    FormMain main_screen;
+    
+    public FormLinguagens(FormMain main_screen) {
+        this.main_screen = main_screen;
         initComponents();
         
-        tabela_complexidade.setModel(modelo_tabela);
+        tabela_linguagens.setModel(modelo_tabela);
         
         modelo_tabela.addColumn("Código");
-        modelo_tabela.addColumn("Complexidade");
+        modelo_tabela.addColumn("Linguagem de Programação");      
         
         try{
             Connection con = Mysql.conectar();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM complexidade ORDER BY DES_GRAU_COMPLEXIDADE ASC");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM linguagem ORDER BY NOM_LINGUAGEM ASC");
                                  
             ResultSet rs = ps.executeQuery();
             while(rs.next())
             {
-                modelo_tabela.addRow(new Object[] { rs.getInt("COD_COMPLEXIDADE"), rs.getString("DES_GRAU_COMPLEXIDADE") });
+                modelo_tabela.addRow(new Object[] { rs.getInt("COD_LINGUAGEM"), rs.getString("NOM_LINGUAGEM") });
             }
         }
         catch(SQLException e)
@@ -60,7 +61,7 @@ public class FormComplexidade extends javax.swing.JFrame {
         codigo = new javax.swing.JTextField();
         area_pesquisa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tabela_complexidade = new javax.swing.JTable();
+        tabela_linguagens = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -69,13 +70,13 @@ public class FormComplexidade extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Complexidade");
+        setTitle("Cadastro de Linguagens de Programação");
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Complexidade:");
+        jLabel2.setText("Linguagem de Programação:");
 
-        tabela_complexidade.setModel(new javax.swing.table.DefaultTableModel(
+        tabela_linguagens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -83,7 +84,7 @@ public class FormComplexidade extends javax.swing.JFrame {
                 {null, null}
             },
             new String [] {
-                "Código", "Complexidade"
+                "Código", "Linguagem de Programação"
             }
         ) {
             Class[] types = new Class [] {
@@ -94,7 +95,7 @@ public class FormComplexidade extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tabela_complexidade);
+        jScrollPane1.setViewportView(tabela_linguagens);
 
         jButton1.setText("Incluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +139,7 @@ public class FormComplexidade extends javax.swing.JFrame {
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -189,6 +190,6 @@ public class FormComplexidade extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tabela_complexidade;
+    private javax.swing.JTable tabela_linguagens;
     // End of variables declaration//GEN-END:variables
 }
