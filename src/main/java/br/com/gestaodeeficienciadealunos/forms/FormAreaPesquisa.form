@@ -53,7 +53,7 @@
                               <Component id="btn_incluir" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="btn_atualizar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
                               <Component id="btn_excluir" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>

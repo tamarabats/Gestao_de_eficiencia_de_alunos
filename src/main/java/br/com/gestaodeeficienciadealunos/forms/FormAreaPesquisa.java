@@ -146,7 +146,7 @@ public class FormAreaPesquisa extends javax.swing.JFrame{
                                 .addComponent(btn_incluir)
                                 .addGap(18, 18, 18)
                                 .addComponent(btn_atualizar)
-                                .addGap(155, 155, 155)
+                                .addGap(150, 150, 150)
                                 .addComponent(btn_excluir)))))
                 .addGap(30, 30, 30))
         );
@@ -199,7 +199,6 @@ public class FormAreaPesquisa extends javax.swing.JFrame{
 
     private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
         
-        
         int id = (int) modelo_tabela.getValueAt(tabela_area_pesquisa.getSelectedRow(), 0);
 
         try{
@@ -216,12 +215,12 @@ public class FormAreaPesquisa extends javax.swing.JFrame{
     }//GEN-LAST:event_btn_excluirActionPerformed
 
     private void tabela_area_pesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_area_pesquisaMouseClicked
-        String id = modelo_tabela.getValueAt(tabela_area_pesquisa.getSelectedRow(), 0).toString();
-        String codigo = modelo_tabela.getValueAt(tabela_area_pesquisa.getSelectedRow(), 1).toString();
+        String codigo = modelo_tabela.getValueAt(tabela_area_pesquisa.getSelectedRow(), 0).toString();
+        String area_pesquisa = modelo_tabela.getValueAt(tabela_area_pesquisa.getSelectedRow(), 1).toString();
         String descricao = modelo_tabela.getValueAt(tabela_area_pesquisa.getSelectedRow(), 2).toString();
         
-        campo_codigo.setText(id);
-        campo_area_pesquisa.setText(codigo);
+        campo_codigo.setText(codigo);
+        campo_area_pesquisa.setText(area_pesquisa);
         campo_descricao.setText(descricao);
     }//GEN-LAST:event_tabela_area_pesquisaMouseClicked
 

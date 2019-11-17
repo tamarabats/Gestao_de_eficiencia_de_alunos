@@ -5,10 +5,7 @@
  */
 package br.com.gestaodeeficienciadealunos.forms;
 
-import br.com.gestaodeeficienciadealunos.Mysql;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import br.com.gestaodeeficienciadealunos.Curso;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +18,7 @@ public class FormCursos extends javax.swing.JFrame {
 
     DefaultTableModel modelo_tabela = new DefaultTableModel();
     FormMain main_screen;
+    Curso cs;
     
     public FormCursos(FormMain main_screen) {
         this.main_screen = main_screen;
@@ -32,15 +30,10 @@ public class FormCursos extends javax.swing.JFrame {
         modelo_tabela.addColumn("Curso");
         modelo_tabela.addColumn("Período");
         
-        try{
-            Connection con = Mysql.conectar();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM curso ORDER BY NOM_CURSO ASC");
-                                 
-            ResultSet rs = ps.executeQuery();
-            while(rs.next())
-            {
-                modelo_tabela.addRow(new Object[] { rs.getInt("COD_CURSO"), rs.getString("NOM_CURSO"), rs.getString("NUM_PERIODO") });
-            }
+        cs = new Curso(modelo_tabela);
+        try
+        {
+            cs.iniciar();
         }
         catch(SQLException e)
         {
@@ -59,23 +52,31 @@ public class FormCursos extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        codigo = new javax.swing.JTextField();
-        area_pesquisa = new javax.swing.JTextField();
+        campo_codigo = new javax.swing.JTextField();
+        campo_curso = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela_cursos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btn_incluir = new javax.swing.JButton();
+        btn_excluir = new javax.swing.JButton();
+        btn_resetar = new javax.swing.JButton();
+        btn_consultar = new javax.swing.JButton();
+        btn_atualizar = new javax.swing.JButton();
+        campo_periodo = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Cursos");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel1.setText("Código:");
 
         jLabel2.setText("Curso:");
+
+        campo_codigo.setEditable(false);
 
         tabela_cursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,55 +97,83 @@ public class FormCursos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        tabela_cursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabela_cursosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela_cursos);
 
-        jButton1.setText("Incluir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_incluir.setText("Incluir");
+        btn_incluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_incluirActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Excluir");
+        btn_excluir.setText("Excluir");
+        btn_excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_excluirActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Gravar");
+        btn_resetar.setText("Resetar");
+        btn_resetar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_resetarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Cancelar");
+        btn_consultar.setText("Consultar");
+        btn_consultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_consultarActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Consultar");
+        btn_atualizar.setText("Atualizar");
+        btn_atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_atualizarActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Editar");
+        jLabel3.setText("Período");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(5, 5, 5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(area_pesquisa)
+                            .addComponent(campo_curso)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(campo_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(btn_consultar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_resetar)
+                                .addGap(151, 151, 151)
+                                .addComponent(btn_incluir)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_atualizar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_excluir))
+                            .addComponent(campo_periodo))))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -153,43 +182,149 @@ public class FormCursos extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campo_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(area_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campo_curso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton6)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton2))
+                    .addComponent(campo_periodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)
-                .addGap(30, 30, 30))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_consultar)
+                    .addComponent(btn_resetar)
+                    .addComponent(btn_incluir)
+                    .addComponent(btn_atualizar)
+                    .addComponent(btn_excluir))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_incluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_incluirActionPerformed
+        cs.setCurso(campo_curso.getText());
+        cs.setPeriodo(Integer.parseInt(campo_periodo.getText()));
+        
+        try
+        {
+            cs.salvar(cs);
+            modelo_tabela.addRow((Object[]) cs.getRowObject());
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_incluirActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        main_screen.setEnabled(true);
+        main_screen.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
+
+    private void tabela_cursosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabela_cursosMouseClicked
+        String codigo = modelo_tabela.getValueAt(tabela_cursos.getSelectedRow(), 0).toString();
+        String curso = modelo_tabela.getValueAt(tabela_cursos.getSelectedRow(), 1).toString();
+        String periodo = modelo_tabela.getValueAt(tabela_cursos.getSelectedRow(), 2).toString();
+        
+        campo_codigo.setText(codigo);
+        campo_curso.setText(curso);
+        campo_periodo.setText(periodo);
+    }//GEN-LAST:event_tabela_cursosMouseClicked
+
+    private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
+        if(campo_codigo.getText().equals(""))
+        {
+            cs.setCodigo(0);
+        }
+        else
+        {
+            cs.setCodigo(Integer.parseInt(campo_codigo.getText()));
+        }
+        cs.setCurso(campo_curso.getText());
+        
+        if(campo_periodo.getText().equals(""))
+        {
+            cs.setPeriodo(0);
+        }
+        else
+        {
+            cs.setPeriodo(Integer.parseInt(campo_periodo.getText()));
+        }
+        
+        try
+        {
+            cs.consultar(cs);
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_consultarActionPerformed
+
+    private void btn_excluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_excluirActionPerformed
+        int id = (int) modelo_tabela.getValueAt(tabela_cursos.getSelectedRow(), 0);
+
+        try{
+            if(JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir este item?") == 0)
+            {
+                cs.deletar(id);
+                modelo_tabela.removeRow(tabela_cursos.getSelectedRow());
+            }
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_excluirActionPerformed
+
+    private void btn_resetarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetarActionPerformed
+        try
+        {
+            cs.resetTable();
+            campo_codigo.setText("");
+            campo_curso.setText("");
+            campo_periodo.setText("");
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_resetarActionPerformed
+
+    private void btn_atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atualizarActionPerformed
+        cs.setCodigo(Integer.parseInt(campo_codigo.getText()));
+        cs.setCurso(campo_curso.getText());
+        cs.setPeriodo(Integer.parseInt(campo_periodo.getText()));
+        
+        try
+        {
+            cs.editar(cs);
+            cs.resetTable();
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btn_atualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField area_pesquisa;
-    private javax.swing.JTextField codigo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton btn_atualizar;
+    private javax.swing.JButton btn_consultar;
+    private javax.swing.JButton btn_excluir;
+    private javax.swing.JButton btn_incluir;
+    private javax.swing.JButton btn_resetar;
+    private javax.swing.JTextField campo_codigo;
+    private javax.swing.JTextField campo_curso;
+    private javax.swing.JTextField campo_periodo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela_cursos;
     // End of variables declaration//GEN-END:variables
