@@ -63,6 +63,11 @@ public class FormMain extends javax.swing.JFrame {
         jMenu3.setText("Cadastro");
 
         menu_algoritmo.setText("Algoritmo");
+        menu_algoritmo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_algoritmoActionPerformed(evt);
+            }
+        });
         jMenu3.add(menu_algoritmo);
 
         menu_aluno.setText("Aluno");
@@ -198,12 +203,20 @@ public class FormMain extends javax.swing.JFrame {
     }//GEN-LAST:event_menu_problemaActionPerformed
 
     private void menu_solucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_solucaoActionPerformed
-        // TODO add your handling code here:
+        FormSolucao solucao = new FormSolucao(this);
+        this.setEnabled(false);
+        solucao.setVisible(true);
     }//GEN-LAST:event_menu_solucaoActionPerformed
 
     private void menu_sairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_sairActionPerformed
         this.dispose();
     }//GEN-LAST:event_menu_sairActionPerformed
+
+    private void menu_algoritmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_algoritmoActionPerformed
+        FormAlgoritmo algoritmo = new FormAlgoritmo(this);
+        this.setEnabled(false);
+        algoritmo.setVisible(true);
+    }//GEN-LAST:event_menu_algoritmoActionPerformed
 
     /**
      * @param args the command line arguments
